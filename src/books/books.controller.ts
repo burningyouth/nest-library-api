@@ -5,9 +5,10 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put
 } from '@nestjs/common';
-import { BooksService, CreateBook, UpdateBook } from './books.service';
+import { BooksService } from './books.service';
+import { CreateBookDto, UpdateBookDto } from './interfaces/books';
 
 @Controller('books')
 export class BooksController {
@@ -19,22 +20,22 @@ export class BooksController {
   }
 
   @Get(':id')
-  findById(@Param('id') id: string) {
-    return this.service.getBook(+id);
+  findById(@Param('id') id: Id) {
+    return this.service.getBook(id);
   }
 
   @Post()
-  create(@Body() book: CreateBook) {
+  create(@Body() book: CreateBookDto) {
     return this.service.createBook(book);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() book: UpdateBook) {
-    return this.service.updateBook(+id, book);
+  update(@Param('id') id: Id, @Body() book: UpdateBookDto) {
+    return this.service.updateBook(id, book);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.service.deleteBook(+id);
+  delete(@Param('id') id: Id) {
+    return this.service.deleteBook(id);
   }
 }

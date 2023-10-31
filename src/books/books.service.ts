@@ -1,38 +1,27 @@
 import { Injectable } from '@nestjs/common';
-
-export interface IBook {
-  id: Id;
-  title: string;
-  description: string;
-  authors: string;
-  favorite?: string;
-  fileCover?: string;
-  fileName?: string;
-  fileBook?: string;
-}
-
-export type CreateBook = Omit<IBook, 'id'>;
-export type UpdateBook = Partial<IBook>;
+import { Book } from './schemas/book.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CreateBookDto, UpdateBookDto } from './interfaces/books';
 
 @Injectable()
 export class BooksService {
-  books: Record<number, IBook> = {};
+  constructor(@InjectModel(Book.name) private bookModel: Model<Book>) {}
+
   getBooks() {
-    return Object.values(this.books);
+    return this.bookModel.find().exec();
   }
   getBook(id: Id) {
-    return this.books[id];
+    return this.bookModel.findById(id).exec();
   }
-  async createBook(book: CreateBook) {
-    const id = Object.keys(this.books).length + 1;
-    this.books[id] = { id, ...book };
-    return this.books[id];
+  createBook(book: CreateBookDto) {
+    const newBook = new this.bookModel(book);
+    return newBook.save();
   }
-  updateBook(id: Id, book: Partial<IBook>) {
-    this.books[id] = { ...this.books[id], ...book };
-    return this.books[id];
+  updateBook(id: Id, book: UpdateBookDto) {
+    return this.bookModel.findByIdAndUpdate(id, book);
   }
   deleteBook(id: Id) {
-    delete this.books[id];
+    return this.bookModel.findByIdAndRemove(id);
   }
 }
