@@ -14,6 +14,7 @@ export class BooksService {
   getBook(id: Id) {
     return this.bookModel.findById(id).exec();
   }
+
   createBook(book: CreateBookDto) {
     const newBook = new this.bookModel(book);
     return newBook.save();
