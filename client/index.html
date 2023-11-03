@@ -1,0 +1,19 @@
+<!-- FILEPATH: /Users/nikita/VScodeProjects/nest-library-api/src/static/index.html -->
+
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO Example</title>
+  </head>
+  <body>
+    <h1>Socket.IO Example</h1>
+    <script src="http://localhost:3000/socket.io/socket.io.min.js"></script>
+    <script>
+      const socket = io('http://localhost:3000'); // Replace with your server URL
+
+      socket.emit('get-all-comments', { bookId: 1 }, (res) => {
+        console.log(res);
+      });
+    </script>
+  </body>
+</html>
