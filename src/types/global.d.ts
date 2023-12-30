@@ -1,1 +1,1 @@
-type Id = string;
+type Id = number;

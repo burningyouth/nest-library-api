@@ -7,6 +7,8 @@ export type BookDocument = HydratedDocument<Book>;
 
 @Schema()
 export class Book implements IBook {
+  @Prop({ type: Number, required: true, unique: true })
+  id: number;
   @Prop({
     required: true
   })
