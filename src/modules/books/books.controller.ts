@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto, UpdateBookDto } from './interfaces/books';
-import { JoiValidationPipe } from 'src/validation/pipes/validation.pipe';
+import { JoiValidationPipe } from '../validation/pipes/validation.pipe';
 import { bookCreateSchema, bookUpdateSchema } from './schemas/book.schema';
 import { JWTAuthGuard } from '../auth/jwt.auth.guard';
 
