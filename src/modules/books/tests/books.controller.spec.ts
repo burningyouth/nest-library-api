@@ -3,8 +3,8 @@ import { BooksController } from '../books.controller';
 import { BooksService } from '../books.service';
 import { Book } from '../schemas/book.schema';
 
-const bookStub = (): Book => ({
-  id: 1,
+const bookStub = (): Book & { _id: Id } => ({
+  _id: '1',
   title: 'Test Book',
   authors: 'Test Author',
   description: 'Test Description',
@@ -45,8 +45,8 @@ describe('BooksController', () => {
   });
 
   it('should return one book', async () => {
-    expect(await booksController.findById(1)).toEqual(bookStub());
-    expect(booksService.getBook).toBeCalledWith(1);
+    expect(await booksController.findById('1')).toEqual(bookStub());
+    expect(booksService.getBook).toBeCalledWith('1');
   });
 
   it('should create a book', async () => {
@@ -58,12 +58,12 @@ describe('BooksController', () => {
   it('should update a book', async () => {
     const book = bookStub();
 
-    expect(await booksController.update(1, book)).toEqual(book);
-    expect(booksService.updateBook).toBeCalledWith(1, book);
+    expect(await booksController.update('1', book)).toEqual(book);
+    expect(booksService.updateBook).toBeCalledWith('1', book);
   });
 
   it('should remove a book', async () => {
-    expect(await booksController.delete(1)).toEqual(bookStub());
-    expect(booksService.deleteBook).toBeCalledWith(1);
+    expect(await booksController.delete('1')).toEqual(bookStub());
+    expect(booksService.deleteBook).toBeCalledWith('1');
   });
 });
