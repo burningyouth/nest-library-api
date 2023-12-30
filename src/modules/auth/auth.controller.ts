@@ -1,5 +1,5 @@
 import { Body, Controller, Post, UsePipes } from '@nestjs/common';
-import { JoiValidationPipe } from 'src/modules/validation/pipes/validation.pipe';
+import { JoiValidationPipe } from 'src/validation/pipes/validation.pipe';
 import { AuthService } from './auth.service';
 import { LoginDto, RegistrationDto } from './interfaces/auth';
 import { loginSchema, registerSchema } from './schemas/auth.schemas';
